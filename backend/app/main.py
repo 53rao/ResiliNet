@@ -1,8 +1,12 @@
 """FastAPI entry point for the ResiliCity MVP."""
 
+# pyrefly: ignore [missing-import]
 from fastapi import FastAPI
+# pyrefly: ignore [missing-import]
 from fastapi.middleware.cors import CORSMiddleware
+# pyrefly: ignore [missing-import]
 import networkx as nx
+# pyrefly: ignore [missing-import]
 from pydantic import BaseModel
 
 from app.graph_repository import get_graph, get_network_graph
@@ -79,6 +83,7 @@ def graph_topology() -> TopologyResponse:
     )
 
 
+# pyrefly: ignore [missing-import]
 from fastapi import HTTPException
 from app.cascade import CascadeRequest, simulate
 from app.prediction import PredictionRequest, ImpactPrediction, predict_impact
@@ -98,4 +103,15 @@ def predict(request: PredictionRequest) -> ImpactPrediction:
         return predict_impact(get_graph(), request)
     except ValueError as error:
         raise HTTPException(status_code=400, detail=str(error)) from error
+
+
+from app.optimize import OptimizationRequest, optimize_impact
+
+@app.post('/optimize', tags=['simulation'])
+def optimize(request: OptimizationRequest) -> dict:
+    try:
+        return optimize_impact(get_graph(), request)
+    except ValueError as error:
+        raise HTTPException(status_code=400, detail=str(error)) from error
+
 

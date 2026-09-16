@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import type { Domain, ImpactPrediction } from "@/lib/types";
+import type { Domain, ImpactPrediction, OptimizationResult } from "@/lib/types";
 import { AgentRunningView } from "@/components/AgentRunningView";
 
 const DOMAIN_COLOR: Record<Domain, string> = {
@@ -22,11 +22,12 @@ const DOMAIN_ICON: Record<Domain, string> = {
 
 interface ImpactReportModalProps {
   prediction: ImpactPrediction;
+  optimization: OptimizationResult | null;
   onClose: () => void;
   onSelectNode?: (nodeId: string) => void;
 }
 
-export function ImpactReportModal({ prediction, onClose, onSelectNode }: ImpactReportModalProps) {
+export function ImpactReportModal({ prediction, optimization, onClose, onSelectNode }: ImpactReportModalProps) {
   const [domainAgentRunning, setDomainAgentRunning] = useState(true);
   const [mitigationAgentRunning, setMitigationAgentRunning] = useState(true);
   return (
@@ -190,21 +191,35 @@ export function ImpactReportModal({ prediction, onClose, onSelectNode }: ImpactR
                 durationMs={7000}
                 onComplete={() => setMitigationAgentRunning(false)}
               />
-            ) : (
+            ) : optimization ? (
               <>
                 <p className="bento-mitigation-intro animate-fade-in">
-                  The MCTS optimization model evaluated downstream vulnerability trees and identified
-                  the following highest-leverage interventions:
+                  MCTS optimization completed with <strong>{optimization.search_stats.iterations}</strong> simulations in {optimization.timing.total_ms}ms.
+                  <br/>
+                  Mitigated priority-weighted damage: <strong>{optimization.objective.mitigated_damage}</strong> (down from {optimization.objective.baseline_damage})
+                  <br/>
+                  Impact reduction: <strong>{optimization.objective.absolute_improvement}</strong> 
+                  {optimization.objective.percentage_improvement != null ? ` (${optimization.objective.percentage_improvement.toFixed(1)}%)` : ''}
                 </p>
                 <div className="bento-mitigation-list animate-fade-in">
-                  {prediction.recommended_interventions.map((rec, idx) => (
-                    <div key={idx} className="bento-mitigation-item">
-                      <div className="bento-mitigation-num">{idx + 1}</div>
-                      <p className="bento-mitigation-text">{rec}</p>
+                  {optimization.selected_protections.length > 0 ? (
+                    optimization.selected_protections.map((rec, idx) => (
+                      <div key={idx} className="bento-mitigation-item">
+                        <div className="bento-mitigation-num">{idx + 1}</div>
+                        <p className="bento-mitigation-text">
+                          Protect node <strong>{rec.node_id}</strong> (Multiply {rec.parameter} by {rec.multiplier})
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="bento-mitigation-item">
+                      <p className="bento-mitigation-text">No useful protections found within budget.</p>
                     </div>
-                  ))}
+                  )}
                 </div>
               </>
+            ) : (
+              <p className="bento-mitigation-intro animate-fade-in">Optimization result unavailable.</p>
             )}
           </div>
 

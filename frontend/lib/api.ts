@@ -118,7 +118,7 @@ function isNetworkGraph(value: unknown): value is NetworkGraph {
 export interface DemoRun {
   graph_version: string;
   model_version: string;
-  input: { graph_version: string; node_id: string; severity: "mild" | "moderate" | "severe"; duration_steps: number };
+  input: { graph_version: string; node_id: string; severity: "mild" | "moderate" | "severe"; duration_steps: number; seed?: number };
   events: import("./types").CascadeEvent[];
   truncated: boolean;
   assumptions: string[];
@@ -131,6 +131,17 @@ export async function runCascade(input: DemoRun["input"], signal?: AbortSignal):
   if (!response.ok) {
     const error = await response.json().catch(() => null);
     throw new Error(typeof error?.detail === "string" ? error.detail : `Simulation failed (HTTP ${response.status})`);
+  }
+  return response.json();
+}
+
+export async function runOptimization(input: DemoRun["input"] & { budget: number }, signal?: AbortSignal): Promise<import("./types").OptimizationResult> {
+  const response = await fetch(`${getApiBaseUrl()}/optimize`, {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(input), signal,
+  });
+  if (!response.ok) {
+    const error = await response.json().catch(() => null);
+    throw new Error(typeof error?.detail === "string" ? error.detail : `Optimization failed (HTTP ${response.status})`);
   }
   return response.json();
 }

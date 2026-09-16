@@ -1,5 +1,6 @@
 """Small deterministic demonstration model; NSU values are illustrative."""
 from typing import Literal
+# pyrefly: ignore [missing-import]
 from pydantic import Field
 from app.models import ContractModel, Graph
 
@@ -8,6 +9,7 @@ class CascadeRequest(ContractModel):
     node_id: str
     severity: Literal['mild', 'moderate', 'severe'] = 'severe'
     duration_steps: int = Field(default=6, ge=1, le=12)
+    seed: int = Field(default=20260915, ge=0, le=2147483647)
 
 def simulate(graph: Graph, request: CascadeRequest) -> dict:
     nodes = {node.id: node for node in graph.nodes}
