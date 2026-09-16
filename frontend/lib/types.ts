@@ -209,3 +209,44 @@ export interface ImpactPrediction {
   affected_nodes: PredictedNodeImpact[];
   recommended_interventions: string[];
 }
+
+export interface Protection {
+  node_id: string;
+  parameter: string;
+  old_value: number;
+  new_value: number;
+  multiplier: number;
+}
+
+export interface OptimizationSearchStats {
+  evaluated_sets: number;
+  cache_hits: number;
+  iterations: number;
+  elapsed_ms: number;
+  greedy_evaluated: boolean;
+  no_action_evaluated: boolean;
+}
+
+export interface OptimizationObjective {
+  name: string;
+  baseline_damage: number;
+  mitigated_damage: number;
+  absolute_improvement: number;
+  percentage_improvement: number | null;
+}
+
+export interface OptimizationResult {
+  optimization_id: string;
+  request_id: string;
+  baseline_run_id: string;
+  graph_version: string;
+  model_version: string;
+  input: any;
+  algorithm_used: string;
+  selected_protections: Protection[];
+  search_stats: OptimizationSearchStats;
+  objective: OptimizationObjective;
+  mitigated_result: CascadeResult;
+  timing: any;
+  termination_reason: string;
+}

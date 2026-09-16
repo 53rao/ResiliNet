@@ -3,9 +3,9 @@
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { PulseIcon } from "@/components/Icons";
-import { fetchGraph, runCascade, predictImpact, type DemoRun } from "@/lib/api";
+import { fetchGraph, runCascade, predictImpact, runOptimization, type DemoRun } from "@/lib/api";
 import { createInitialPlaybackState, getStepMetrics, playbackReducer } from "@/lib/playback";
-import type { Domain, NetworkGraph, ImpactPrediction } from "@/lib/types";
+import type { Domain, NetworkGraph, ImpactPrediction, OptimizationResult } from "@/lib/types";
 import { ImpactReportModal } from "@/components/ImpactReportModal";
 
 const NetworkMap = dynamic(
@@ -64,6 +64,7 @@ export function DashboardShell() {
   const [busy, setBusy]         = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [prediction, setPrediction] = useState<ImpactPrediction | null>(null);
+  const [optimization, setOptimization] = useState<OptimizationResult | null>(null);
   const [showReport, setShowReport] = useState(false);
 
   const [playback, dispatch] = useReducer(playbackReducer, undefined, createInitialPlaybackState);
@@ -133,9 +134,9 @@ export function DashboardShell() {
     setRun(null);
     dispatch({ type: "reset" });
     try {
-      const [result, pred] = await Promise.all([
+      const [result, pred, opt] = await Promise.all([
         runCascade(
-          { graph_version: graph.graph_version, node_id: selected.id, severity, duration_steps: duration },
+          { graph_version: graph.graph_version, node_id: selected.id, severity, duration_steps: duration, seed: 20260915 },
           c.signal
         ),
         predictImpact(
@@ -145,11 +146,19 @@ export function DashboardShell() {
           console.error("Prediction failed:", err);
           return null;
         }),
+        runOptimization(
+          { graph_version: graph.graph_version, node_id: selected.id, severity, duration_steps: duration, seed: 20260915, budget: 2 },
+          c.signal
+        ).catch(err => {
+          console.error("Optimization failed:", err);
+          return null;
+        })
       ]);
       if (controller.current !== c) return;
       setRun(result);
       if (pred) {
         setPrediction(pred);
+        setOptimization(opt);
         setShowReport(true);
       }
       dispatch({ type: "start", events: result.events });
@@ -468,6 +477,7 @@ export function DashboardShell() {
       {showReport && prediction && (
         <ImpactReportModal
           prediction={prediction}
+          optimization={optimization}
           onClose={() => setShowReport(false)}
           onSelectNode={selectNode}
         />

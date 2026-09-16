@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -14,7 +15,7 @@ def test_health_returns_versioned_status() -> None:
         "status": "ok",
         "service": "resilicity-api",
         "api_version": "0.2.0",
-        "graph_version": "0.3.0",
+        "graph_version": "0.5.0",
     }
 
 

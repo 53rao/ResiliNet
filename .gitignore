@@ -22,3 +22,7 @@ docs/
 .agent-browser/
 playwright-report/
 test-results/
+
+#DOC
+docs
+__MACOSX
