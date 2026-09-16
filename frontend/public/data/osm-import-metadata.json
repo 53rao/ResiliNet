@@ -1,0 +1,110 @@
+{
+  "source": "OpenStreetMap contributors via Overpass API",
+  "license": "ODbL 1.0",
+  "copyright_url": "https://www.openstreetmap.org/copyright",
+  "overpass_endpoints": {
+    "context": "https://overpass-api.de/api/interpreter",
+    "assets": "https://overpass-api.de/api/interpreter"
+  },
+  "retrieved_at": "2026-09-15T13:41:24Z",
+  "center": {
+    "name": "London",
+    "lat": 51.5074,
+    "lng": -0.1278
+  },
+  "radius_metres": 50000,
+  "runtime_network_requests": 0,
+  "context_feature_count": 3576,
+  "network_node_count": 72,
+  "network_edge_count": 118,
+  "selected_osm_elements": {
+    "power": [
+      "way/447745654",
+      "way/91012657",
+      "way/1328208155",
+      "way/361266172",
+      "way/741939707",
+      "way/103852980",
+      "way/436140620",
+      "way/24165071",
+      "way/646298325",
+      "way/687453295",
+      "way/322545471",
+      "way/1411139683"
+    ],
+    "water": [
+      "way/1082308085",
+      "way/1255982915",
+      "node/7551286457",
+      "way/424492296",
+      "node/14112560275",
+      "way/1150691946",
+      "way/1531564593",
+      "way/1296429742",
+      "way/465939152",
+      "way/26183247",
+      "way/4049105",
+      "relation/19352052"
+    ],
+    "traffic": [
+      "way/200596931",
+      "way/58885891",
+      "way/610874932",
+      "way/445475523",
+      "way/37728061",
+      "way/37335453",
+      "way/166269248",
+      "way/30496673",
+      "node/6470954425",
+      "node/33617959",
+      "node/1630329361",
+      "node/26603681",
+      "node/26671615",
+      "node/5178805068",
+      "node/171622625",
+      "node/27534808",
+      "node/11080816",
+      "node/290017288"
+    ],
+    "healthcare": [
+      "node/12873245976",
+      "way/28302867",
+      "node/10151215686",
+      "relation/20228559",
+      "way/1443220496",
+      "way/134067230",
+      "way/495492898",
+      "way/483927982",
+      "node/12583128351",
+      "node/5094405018",
+      "relation/17729169",
+      "way/1550446145",
+      "node/9689927847",
+      "way/1370770641",
+      "way/116374893",
+      "way/445570191",
+      "way/673936984",
+      "way/89252792"
+    ],
+    "public_safety": [
+      "relation/109553",
+      "way/138477827",
+      "way/65047811",
+      "way/93172309",
+      "way/71511457",
+      "way/233148321",
+      "way/349934988",
+      "way/87425199",
+      "way/185916828",
+      "way/404418679",
+      "way/488608580",
+      "way/511256303"
+    ]
+  },
+  "queries": {
+    "context": "[out:json][timeout:240];\n(\n  way[\"highway\"~\"^(motorway|trunk|primary)$\"](51.0582,-0.8497,51.9566,0.5941);\n  way[\"waterway\"~\"^(river|canal)$\"](51.0582,-0.8497,51.9566,0.5941);\n);\nout tags geom;",
+    "assets": "[out:json][timeout:240];\n(\n  nwr[\"amenity\"~\"^(hospital|clinic|police|fire_station)$\"](around:50000,51.5074,-0.1278);\n  nwr[\"healthcare\"~\"^(hospital|clinic)$\"](around:50000,51.5074,-0.1278);\n  nwr[\"emergency\"=\"ambulance_station\"](around:50000,51.5074,-0.1278);\n  nwr[\"power\"~\"^(substation|plant)$\"](around:50000,51.5074,-0.1278);\n  nwr[\"man_made\"=\"pumping_station\"](around:50000,51.5074,-0.1278);\n  nwr[\"water\"~\"^(reservoir|basin)$\"](around:50000,51.5074,-0.1278);\n  nwr[\"man_made\"=\"water_works\"](around:50000,51.5074,-0.1278);\n  nwr[\"highway\"=\"traffic_signals\"](around:50000,51.5074,-0.1278);\n  way[\"bridge\"=\"yes\"][\"highway\"~\"^(motorway|trunk|primary|secondary|tertiary)$\"](around:50000,51.5074,-0.1278);\n);\nout center tags;"
+  },
+  "context_raw_feature_count": 61380,
+  "assets_retrieved_at": "2026-09-15T14:01:26Z"
+}

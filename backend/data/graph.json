@@ -1,0 +1,1142 @@
+{
+  "graph_version": "0.5.0",
+  "name": "Greater London infrastructure corridor demonstration",
+  "generated_at": "2026-09-15T16:30:00.000000+00:00",
+  "locality": {
+    "name": "Greater London \u00b7 UK",
+    "coordinate_reference": "WGS84",
+    "bounding_box": {
+      "south": 51.45,
+      "west": -0.34,
+      "north": 51.59,
+      "east": 0.01
+    }
+  },
+  "units": {
+    "load": "NSU",
+    "capacity": "NSU",
+    "edge_weight": "maximum transferred stress in hundreds of NSU"
+  },
+  "nodes": [
+    {
+      "id": "hospital-st-marys",
+      "name": "St Mary's Hospital",
+      "domain": "healthcare",
+      "type": "hospital",
+      "base_load": 79,
+      "capacity": 100,
+      "priority": "critical",
+      "priority_weight": 4,
+      "location": {
+        "lat": 51.5175,
+        "lng": -0.1743
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap node/254099812; St Mary's Hospital, Praed St, Paddington. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "node",
+        "element_id": 254099812,
+        "url": "https://www.openstreetmap.org/node/254099812",
+        "tags": {
+          "amenity": "hospital",
+          "emergency": "yes",
+          "healthcare": "hospital",
+          "name": "St Mary's Hospital",
+          "operator": "Imperial College Healthcare NHS Trust",
+          "addr:street": "Praed Street",
+          "addr:city": "London",
+          "addr:postcode": "W2 1NY",
+          "wikidata": "Q7594679",
+          "wikipedia": "en:St Mary's Hospital, London"
+        }
+      }
+    },
+    {
+      "id": "hospital-homerton",
+      "name": "Homerton Hospital",
+      "domain": "healthcare",
+      "type": "hospital",
+      "base_load": 76,
+      "capacity": 100,
+      "priority": "critical",
+      "priority_weight": 4,
+      "location": {
+        "lat": 51.5507,
+        "lng": -0.0455
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap way/90401509; Homerton Healthcare NHS Foundation Trust, Hackney. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "way",
+        "element_id": 90401509,
+        "url": "https://www.openstreetmap.org/way/90401509",
+        "tags": {
+          "amenity": "hospital",
+          "emergency": "yes",
+          "healthcare": "hospital",
+          "name": "Homerton Hospital",
+          "operator": "Homerton Healthcare NHS Foundation Trust",
+          "addr:street": "Homerton High Street",
+          "addr:city": "London",
+          "addr:postcode": "E9 6SR",
+          "wikidata": "Q5887367",
+          "wikipedia": "en:Homerton University Hospital"
+        }
+      }
+    },
+    {
+      "id": "hospital-kings-college",
+      "name": "King's College Hospital",
+      "domain": "healthcare",
+      "type": "hospital",
+      "base_load": 82,
+      "capacity": 100,
+      "priority": "critical",
+      "priority_weight": 4,
+      "location": {
+        "lat": 51.4684,
+        "lng": -0.0937
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap way/121590965; King's College Hospital, Denmark Hill, Southwark. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "way",
+        "element_id": 121590965,
+        "url": "https://www.openstreetmap.org/way/121590965",
+        "tags": {
+          "amenity": "hospital",
+          "emergency": "yes",
+          "healthcare": "hospital",
+          "name": "King's College Hospital",
+          "operator": "King's College Hospital NHS Foundation Trust",
+          "addr:street": "Denmark Hill",
+          "addr:city": "London",
+          "addr:postcode": "SE5 9RS",
+          "wikidata": "Q6410670",
+          "wikipedia": "en:King's College Hospital"
+        }
+      }
+    },
+    {
+      "id": "hospital-charing-cross",
+      "name": "Charing Cross Hospital",
+      "domain": "healthcare",
+      "type": "hospital",
+      "base_load": 74,
+      "capacity": 100,
+      "priority": "critical",
+      "priority_weight": 4,
+      "location": {
+        "lat": 51.4869,
+        "lng": -0.2198
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap way/305282285; Charing Cross Hospital, Fulham Palace Road, Hammersmith. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "way",
+        "element_id": 305282285,
+        "url": "https://www.openstreetmap.org/way/305282285",
+        "tags": {
+          "amenity": "hospital",
+          "emergency": "yes",
+          "healthcare": "hospital",
+          "name": "Charing Cross Hospital",
+          "operator": "Imperial College Healthcare NHS Trust",
+          "addr:street": "Fulham Palace Road",
+          "addr:city": "London",
+          "addr:postcode": "W6 8RF",
+          "wikidata": "Q2940369",
+          "wikipedia": "en:Charing Cross Hospital"
+        }
+      }
+    },
+    {
+      "id": "hospital-thomas",
+      "name": "St Thomas' Hospital",
+      "domain": "healthcare",
+      "type": "hospital",
+      "base_load": 78,
+      "capacity": 100,
+      "priority": "critical",
+      "priority_weight": 4,
+      "location": {
+        "lat": 51.4994,
+        "lng": -0.1186
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap way/122227536; St Thomas' Hospital, Westminster Bridge Road. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "way",
+        "element_id": 122227536,
+        "url": "https://www.openstreetmap.org/way/122227536",
+        "tags": {
+          "amenity": "hospital",
+          "emergency": "yes",
+          "healthcare": "hospital",
+          "name": "St Thomas' Hospital",
+          "operator": "Guy's and St Thomas' NHS Foundation Trust",
+          "addr:street": "Westminster Bridge Road",
+          "addr:city": "London",
+          "addr:postcode": "SE1 7EH",
+          "wikidata": "Q1143779",
+          "wikipedia": "en:St Thomas' Hospital"
+        }
+      }
+    },
+    {
+      "id": "hospital-guys",
+      "name": "Guy's Hospital",
+      "domain": "healthcare",
+      "type": "hospital",
+      "base_load": 74,
+      "capacity": 100,
+      "priority": "critical",
+      "priority_weight": 4,
+      "location": {
+        "lat": 51.5031,
+        "lng": -0.0868
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap way/707322577; Guy's Hospital, Great Maze Pond, Southwark. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "way",
+        "element_id": 707322577,
+        "url": "https://www.openstreetmap.org/way/707322577",
+        "tags": {
+          "amenity": "hospital",
+          "emergency": "no",
+          "healthcare": "hospital",
+          "name": "Guy's Hospital",
+          "operator": "Guy's and St Thomas' NHS Foundation Trust",
+          "addr:street": "Great Maze Pond",
+          "addr:city": "London",
+          "addr:postcode": "SE1 9RT",
+          "wikidata": "Q777039",
+          "wikipedia": "en:Guy's Hospital"
+        }
+      }
+    },
+    {
+      "id": "bridge-chelsea",
+      "name": "Chelsea Bridge",
+      "domain": "traffic",
+      "type": "bridge",
+      "base_load": 68,
+      "capacity": 100,
+      "priority": "high",
+      "priority_weight": 3,
+      "location": {
+        "lat": 51.4845,
+        "lng": -0.1498
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap way/5769011; Chelsea Bridge, Chelsea/Battersea crossing. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "way",
+        "element_id": 5769011,
+        "url": "https://www.openstreetmap.org/way/5769011",
+        "tags": {
+          "bridge": "yes",
+          "highway": "primary",
+          "lit": "yes",
+          "maxspeed": "20 mph",
+          "name": "Chelsea Bridge",
+          "operator": "Transport for London",
+          "ref": "A3031",
+          "wikidata": "Q1066247",
+          "wikipedia": "en:Chelsea Bridge"
+        }
+      }
+    },
+    {
+      "id": "bridge-tower",
+      "name": "Tower Bridge",
+      "domain": "traffic",
+      "type": "bridge",
+      "base_load": 75,
+      "capacity": 100,
+      "priority": "high",
+      "priority_weight": 3,
+      "location": {
+        "lat": 51.5055,
+        "lng": -0.0753
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap way/49825212; Tower Bridge, historic Thames crossing. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "way",
+        "element_id": 49825212,
+        "url": "https://www.openstreetmap.org/way/49825212",
+        "tags": {
+          "bridge": "yes",
+          "highway": "primary",
+          "lit": "yes",
+          "maxspeed": "20 mph",
+          "name": "Tower Bridge",
+          "operator": "City of London Corporation",
+          "tourism": "attraction",
+          "wikidata": "Q13397",
+          "wikipedia": "en:Tower Bridge"
+        }
+      }
+    },
+    {
+      "id": "bridge-london",
+      "name": "London Bridge",
+      "domain": "traffic",
+      "type": "bridge",
+      "base_load": 70,
+      "capacity": 100,
+      "priority": "high",
+      "priority_weight": 3,
+      "location": {
+        "lat": 51.508,
+        "lng": -0.0877
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap way/849624793; London Bridge, primary Thames crossing. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "way",
+        "element_id": 849624793,
+        "url": "https://www.openstreetmap.org/way/849624793",
+        "tags": {
+          "bridge": "yes",
+          "highway": "primary",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "20 mph",
+          "name": "London Bridge",
+          "operator": "Transport for London",
+          "ref": "A3",
+          "wikidata": "Q132560",
+          "wikipedia": "en:London Bridge"
+        }
+      }
+    },
+    {
+      "id": "bridge-westminster",
+      "name": "Westminster Bridge",
+      "domain": "traffic",
+      "type": "bridge",
+      "base_load": 72,
+      "capacity": 100,
+      "priority": "high",
+      "priority_weight": 3,
+      "location": {
+        "lat": 51.5009,
+        "lng": -0.1226
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap way/920237507; Westminster Bridge, primary Thames crossing near Parliament. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "way",
+        "element_id": 920237507,
+        "url": "https://www.openstreetmap.org/way/920237507",
+        "tags": {
+          "bridge": "yes",
+          "highway": "primary",
+          "lanes": "4",
+          "lit": "yes",
+          "maxspeed": "20 mph",
+          "name": "Westminster Bridge",
+          "operator": "Transport for London",
+          "ref": "A302",
+          "tourism": "attraction",
+          "wikidata": "Q456960",
+          "wikipedia": "en:Westminster Bridge"
+        }
+      }
+    },
+    {
+      "id": "power-hackney",
+      "name": "Hackney Power Station",
+      "domain": "power",
+      "type": "substation",
+      "base_load": 71,
+      "capacity": 100,
+      "priority": "critical",
+      "priority_weight": 4,
+      "location": {
+        "lat": 51.5484,
+        "lng": -0.038
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap node/285984462; Electrical substation, Hackney area. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "node",
+        "element_id": 285984462,
+        "url": "https://www.openstreetmap.org/node/285984462",
+        "tags": {
+          "power": "substation",
+          "substation": "transmission",
+          "name": "Hackney Power Station",
+          "operator": "National Grid",
+          "voltage": "132000"
+        }
+      }
+    },
+    {
+      "id": "power-barking",
+      "name": "Barking Power Station",
+      "domain": "power",
+      "type": "substation",
+      "base_load": 73,
+      "capacity": 100,
+      "priority": "critical",
+      "priority_weight": 4,
+      "location": {
+        "lat": 51.518,
+        "lng": -0.065
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap way/23399901; Electrical substation, Barking/East London area. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "way",
+        "element_id": 23399901,
+        "url": "https://www.openstreetmap.org/way/23399901",
+        "tags": {
+          "power": "substation",
+          "substation": "distribution",
+          "name": "Barking Power Station",
+          "operator": "UK Power Networks",
+          "voltage": "33000"
+        }
+      }
+    },
+    {
+      "id": "power-lewisham",
+      "name": "Lewisham Power Station",
+      "domain": "power",
+      "type": "substation",
+      "base_load": 69,
+      "capacity": 100,
+      "priority": "critical",
+      "priority_weight": 4,
+      "location": {
+        "lat": 51.4628,
+        "lng": -0.018
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap node/1892314422; Electrical substation, Lewisham area. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "node",
+        "element_id": 1892314422,
+        "url": "https://www.openstreetmap.org/node/1892314422",
+        "tags": {
+          "power": "substation",
+          "substation": "distribution",
+          "name": "Lewisham Power Station",
+          "operator": "UK Power Networks",
+          "voltage": "33000"
+        }
+      }
+    },
+    {
+      "id": "ambulance-northwick",
+      "name": "Northwick Park Ambulance Centre",
+      "domain": "public_safety",
+      "type": "ambulance_station",
+      "base_load": 65,
+      "capacity": 100,
+      "priority": "critical",
+      "priority_weight": 4,
+      "location": {
+        "lat": 51.5753,
+        "lng": -0.3215
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap node/6544312003; London Ambulance Service station, Harrow. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "node",
+        "element_id": 6544312003,
+        "url": "https://www.openstreetmap.org/node/6544312003",
+        "tags": {
+          "amenity": "ambulance_station",
+          "name": "Northwick Park Ambulance Centre",
+          "operator": "London Ambulance Service NHS Trust",
+          "emergency": "ambulance_station"
+        }
+      }
+    },
+    {
+      "id": "ambulance-wandsworth",
+      "name": "Wandsworth Ambulance Centre",
+      "domain": "public_safety",
+      "type": "ambulance_station",
+      "base_load": 63,
+      "capacity": 100,
+      "priority": "high",
+      "priority_weight": 3,
+      "location": {
+        "lat": 51.4619,
+        "lng": -0.188
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap node/3388281905; London Ambulance Service station, Wandsworth. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "node",
+        "element_id": 3388281905,
+        "url": "https://www.openstreetmap.org/node/3388281905",
+        "tags": {
+          "amenity": "ambulance_station",
+          "name": "Wandsworth Ambulance Centre",
+          "operator": "London Ambulance Service NHS Trust",
+          "emergency": "ambulance_station"
+        }
+      }
+    },
+    {
+      "id": "ambulance-greenwich",
+      "name": "Greenwich Ambulance Centre",
+      "domain": "public_safety",
+      "type": "ambulance_station",
+      "base_load": 62,
+      "capacity": 100,
+      "priority": "high",
+      "priority_weight": 3,
+      "location": {
+        "lat": 51.481,
+        "lng": -0.009
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap node/4028716501; London Ambulance Service station, Greenwich. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "node",
+        "element_id": 4028716501,
+        "url": "https://www.openstreetmap.org/node/4028716501",
+        "tags": {
+          "amenity": "ambulance_station",
+          "name": "Greenwich Ambulance Centre",
+          "operator": "London Ambulance Service NHS Trust",
+          "emergency": "ambulance_station"
+        }
+      }
+    },
+    {
+      "id": "water-chelsea",
+      "name": "Chelsea Water Station",
+      "domain": "water",
+      "type": "pumping_station",
+      "base_load": 68,
+      "capacity": 100,
+      "priority": "high",
+      "priority_weight": 3,
+      "location": {
+        "lat": 51.482,
+        "lng": -0.17
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "synthetic",
+        "source": "Illustrative pumping station near Chelsea/Battersea. Thames Water infrastructure. Operational model fields are assumed.",
+        "confidence": "low"
+      },
+      "osm": null
+    },
+    {
+      "id": "water-bermondsey",
+      "name": "Bermondsey Pumping Station",
+      "domain": "water",
+      "type": "pumping_station",
+      "base_load": 66,
+      "capacity": 100,
+      "priority": "high",
+      "priority_weight": 3,
+      "location": {
+        "lat": 51.4985,
+        "lng": -0.075
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "synthetic",
+        "source": "Illustrative pumping station, Bermondsey/Southwark area. Thames Water infrastructure. Operational model fields are assumed.",
+        "confidence": "low"
+      },
+      "osm": null
+    },
+    {
+      "id": "clinic-soho",
+      "name": "Soho NHS Walk-in Clinic",
+      "domain": "healthcare",
+      "type": "walk_in_clinic",
+      "base_load": 28,
+      "capacity": 100,
+      "priority": "low",
+      "priority_weight": 1,
+      "location": {
+        "lat": 51.5135,
+        "lng": -0.132
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap node/439739414; Soho NHS Walk-in Centre, Frith Street. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "node",
+        "element_id": 439739414,
+        "url": "https://www.openstreetmap.org/node/439739414",
+        "tags": {
+          "amenity": "clinic",
+          "healthcare": "clinic",
+          "name": "Soho NHS Walk-in Clinic"
+        }
+      }
+    },
+    {
+      "id": "traffic-signal-holborn",
+      "name": "Holborn Circus Junction Signals",
+      "domain": "traffic",
+      "type": "traffic_signals",
+      "base_load": 35,
+      "capacity": 100,
+      "priority": "low",
+      "priority_weight": 1,
+      "location": {
+        "lat": 51.5173,
+        "lng": -0.1085
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap node/321890412; Holborn Circus traffic signal installation. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "node",
+        "element_id": 321890412,
+        "url": "https://www.openstreetmap.org/node/321890412",
+        "tags": {
+          "highway": "traffic_signals",
+          "name": "Holborn Circus Signals"
+        }
+      }
+    },
+    {
+      "id": "water-monitoring-battersea",
+      "name": "Battersea Water Monitoring Station",
+      "domain": "water",
+      "type": "monitoring_station",
+      "base_load": 22,
+      "capacity": 100,
+      "priority": "low",
+      "priority_weight": 1,
+      "location": {
+        "lat": 51.478,
+        "lng": -0.145
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "synthetic",
+        "source": "Illustrative drainage and flow monitoring station near Battersea Park. Operational model fields are assumed.",
+        "confidence": "low"
+      },
+      "osm": null
+    },
+    {
+      "id": "transit-hub-elephant",
+      "name": "Elephant & Castle Transit Hub",
+      "domain": "traffic",
+      "type": "transit_hub",
+      "base_load": 54,
+      "capacity": 100,
+      "priority": "medium",
+      "priority_weight": 2,
+      "location": {
+        "lat": 51.4944,
+        "lng": -0.1008
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap node/25287413; Elephant & Castle transport interchange. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "node",
+        "element_id": 25287413,
+        "url": "https://www.openstreetmap.org/node/25287413",
+        "tags": {
+          "public_transport": "station",
+          "name": "Elephant & Castle Station"
+        }
+      }
+    },
+    {
+      "id": "safety-lambeth",
+      "name": "Lambeth Fire & Rescue Station",
+      "domain": "public_safety",
+      "type": "fire_station",
+      "base_load": 44,
+      "capacity": 100,
+      "priority": "medium",
+      "priority_weight": 2,
+      "location": {
+        "lat": 51.493,
+        "lng": -0.118
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "observed",
+        "source": "OpenStreetMap node/53891024; London Fire Brigade Lambeth Station. Operational model fields are assumed.",
+        "confidence": "medium"
+      },
+      "osm": {
+        "element_type": "node",
+        "element_id": 53891024,
+        "url": "https://www.openstreetmap.org/node/53891024",
+        "tags": {
+          "amenity": "fire_station",
+          "name": "Lambeth Fire Station",
+          "operator": "London Fire Brigade"
+        }
+      }
+    },
+    {
+      "id": "substation-southwark",
+      "name": "Southwark Secondary Substation",
+      "domain": "power",
+      "type": "substation",
+      "base_load": 48,
+      "capacity": 100,
+      "priority": "medium",
+      "priority_weight": 2,
+      "location": {
+        "lat": 51.503,
+        "lng": -0.098
+      },
+      "protectable": true,
+      "provenance": {
+        "kind": "synthetic",
+        "source": "UK Power Networks local secondary distribution substation, Southwark. Operational model fields are assumed.",
+        "confidence": "low"
+      },
+      "osm": null
+    }
+  ],
+  "edges": [
+    {
+      "id": "dep-power-hackney-hospital-homerton",
+      "source": "power-hackney",
+      "target": "hospital-homerton",
+      "weight": 0.55,
+      "relationship": "assumed_power_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-power-hackney-bridge-tower",
+      "source": "power-hackney",
+      "target": "bridge-tower",
+      "weight": 0.3,
+      "relationship": "assumed_power_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-power-barking-ambulance-greenwich",
+      "source": "power-barking",
+      "target": "ambulance-greenwich",
+      "weight": 0.48,
+      "relationship": "assumed_power_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-power-barking-hospital-guys",
+      "source": "power-barking",
+      "target": "hospital-guys",
+      "weight": 0.38,
+      "relationship": "assumed_power_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-power-lewisham-hospital-kings-college",
+      "source": "power-lewisham",
+      "target": "hospital-kings-college",
+      "weight": 0.52,
+      "relationship": "assumed_power_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-power-lewisham-water-bermondsey",
+      "source": "power-lewisham",
+      "target": "water-bermondsey",
+      "weight": 0.45,
+      "relationship": "assumed_power_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-bridge-westminster-hospital-thomas",
+      "source": "bridge-westminster",
+      "target": "hospital-thomas",
+      "weight": 0.42,
+      "relationship": "hospital_access_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-bridge-london-hospital-guys",
+      "source": "bridge-london",
+      "target": "hospital-guys",
+      "weight": 0.44,
+      "relationship": "hospital_access_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-bridge-tower-ambulance-greenwich",
+      "source": "bridge-tower",
+      "target": "ambulance-greenwich",
+      "weight": 0.4,
+      "relationship": "ambulance_access_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-bridge-chelsea-hospital-charing-cross",
+      "source": "bridge-chelsea",
+      "target": "hospital-charing-cross",
+      "weight": 0.38,
+      "relationship": "hospital_access_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-bridge-chelsea-water-chelsea",
+      "source": "bridge-chelsea",
+      "target": "water-chelsea",
+      "weight": 0.32,
+      "relationship": "access_disruption",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-ambulance-northwick-hospital-st-marys",
+      "source": "ambulance-northwick",
+      "target": "hospital-st-marys",
+      "weight": 0.46,
+      "relationship": "emergency_service_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-ambulance-wandsworth-hospital-kings-college",
+      "source": "ambulance-wandsworth",
+      "target": "hospital-kings-college",
+      "weight": 0.44,
+      "relationship": "emergency_service_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-ambulance-greenwich-hospital-guys",
+      "source": "ambulance-greenwich",
+      "target": "hospital-guys",
+      "weight": 0.42,
+      "relationship": "emergency_service_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-water-chelsea-hospital-charing-cross",
+      "source": "water-chelsea",
+      "target": "hospital-charing-cross",
+      "weight": 0.4,
+      "relationship": "assumed_water_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-water-bermondsey-hospital-guys",
+      "source": "water-bermondsey",
+      "target": "hospital-guys",
+      "weight": 0.38,
+      "relationship": "assumed_water_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-hospital-thomas-hospital-guys",
+      "source": "hospital-thomas",
+      "target": "hospital-guys",
+      "weight": 0.34,
+      "relationship": "illustrative_demand_transfer",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-hospital-st-marys-hospital-charing-cross",
+      "source": "hospital-st-marys",
+      "target": "hospital-charing-cross",
+      "weight": 0.3,
+      "relationship": "illustrative_demand_transfer",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-bridge-westminster-ambulance-wandsworth",
+      "source": "bridge-westminster",
+      "target": "ambulance-wandsworth",
+      "weight": 0.35,
+      "relationship": "ambulance_access_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-bridge-london-bridge-tower",
+      "source": "bridge-london",
+      "target": "bridge-tower",
+      "weight": 0.28,
+      "relationship": "diverted_demand",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-substation-southwark-transit-elephant",
+      "source": "substation-southwark",
+      "target": "transit-hub-elephant",
+      "weight": 0.35,
+      "relationship": "assumed_power_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-transit-elephant-safety-lambeth",
+      "source": "transit-hub-elephant",
+      "target": "safety-lambeth",
+      "weight": 0.3,
+      "relationship": "assumed_transit_corridor",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-safety-lambeth-hospital-thomas",
+      "source": "safety-lambeth",
+      "target": "hospital-thomas",
+      "weight": 0.4,
+      "relationship": "emergency_route",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-traffic-holborn-clinic-soho",
+      "source": "traffic-signal-holborn",
+      "target": "clinic-soho",
+      "weight": 0.25,
+      "relationship": "traffic_coordination",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-bridge-london-substation-southwark",
+      "source": "bridge-london",
+      "target": "substation-southwark",
+      "weight": 0.3,
+      "relationship": "utility_duct_dependency",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-bridge-chelsea-water-battersea",
+      "source": "bridge-chelsea",
+      "target": "water-monitoring-battersea",
+      "weight": 0.25,
+      "relationship": "bridge_runoff_drainage",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-clinic-soho-hospital-st-marys",
+      "source": "clinic-soho",
+      "target": "hospital-st-marys",
+      "weight": 0.32,
+      "relationship": "patient_referral_pathway",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-water-chelsea-water-battersea",
+      "source": "water-chelsea",
+      "target": "water-monitoring-battersea",
+      "weight": 0.3,
+      "relationship": "discharge_regulation",
+      "kind": "dependency",
+      "provenance": "assumed",
+      "confidence": "low"
+    },
+    {
+      "id": "dep-southwark-custom-demo-0",
+      "source": "substation-southwark",
+      "target": "hospital-thomas",
+      "kind": "dependency",
+      "weight": 0.85,
+      "relationship": "supplies power to",
+      "provenance": "assumed",
+      "confidence": "medium"
+    },
+    {
+      "id": "dep-southwark-custom-demo-1",
+      "source": "substation-southwark",
+      "target": "bridge-westminster",
+      "kind": "dependency",
+      "weight": 0.85,
+      "relationship": "supplies power to",
+      "provenance": "assumed",
+      "confidence": "medium"
+    },
+    {
+      "id": "dep-southwark-custom-demo-2",
+      "source": "substation-southwark",
+      "target": "bridge-london",
+      "kind": "dependency",
+      "weight": 0.85,
+      "relationship": "supplies power to",
+      "provenance": "assumed",
+      "confidence": "medium"
+    },
+    {
+      "id": "dep-southwark-custom-demo-3",
+      "source": "substation-southwark",
+      "target": "bridge-tower",
+      "kind": "dependency",
+      "weight": 0.85,
+      "relationship": "supplies power to",
+      "provenance": "assumed",
+      "confidence": "medium"
+    },
+    {
+      "id": "dep-southwark-custom-demo-4",
+      "source": "substation-southwark",
+      "target": "transit-hub-elephant",
+      "kind": "dependency",
+      "weight": 0.85,
+      "relationship": "supplies power to",
+      "provenance": "assumed",
+      "confidence": "medium"
+    },
+    {
+      "id": "dep-southwark-custom-demo-5",
+      "source": "substation-southwark",
+      "target": "safety-lambeth",
+      "kind": "dependency",
+      "weight": 0.85,
+      "relationship": "supplies power to",
+      "provenance": "assumed",
+      "confidence": "medium"
+    },
+    {
+      "id": "dep-southwark-custom-demo-6",
+      "source": "substation-southwark",
+      "target": "water-bermondsey",
+      "kind": "dependency",
+      "weight": 0.85,
+      "relationship": "supplies power to",
+      "provenance": "assumed",
+      "confidence": "medium"
+    }
+  ],
+  "attributions": [
+    {
+      "name": "OpenStreetMap contributors",
+      "license": "ODbL-1.0",
+      "url": "https://www.openstreetmap.org/copyright",
+      "retrieved_at": "2026-09-15T16:30:00.000000+00:00"
+    }
+  ]
+}
