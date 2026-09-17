@@ -65,6 +65,8 @@ export function DashboardShell() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [prediction, setPrediction] = useState<ImpactPrediction | null>(null);
   const [optimization, setOptimization] = useState<OptimizationResult | null>(null);
+  const [managementChat, setManagementChat] = useState<any>(null);
+  const [citizenChat, setCitizenChat] = useState<any>(null);
   const [showReport, setShowReport] = useState(false);
 
   const [playback, dispatch] = useReducer(playbackReducer, undefined, createInitialPlaybackState);
@@ -134,7 +136,7 @@ export function DashboardShell() {
     setRun(null);
     dispatch({ type: "reset" });
     try {
-      const [result, pred, opt] = await Promise.all([
+      const [result, pred, opt, mgmtChat, citizenChat] = await Promise.all([
         runCascade(
           { graph_version: graph.graph_version, node_id: selected.id, severity, duration_steps: duration, seed: 20260915 },
           c.signal
@@ -152,6 +154,20 @@ export function DashboardShell() {
         ).catch(err => {
           console.error("Optimization failed:", err);
           return null;
+        }),
+        import("@/lib/api").then(api => api.runAgentChat(
+          { node_id: selected.id, severity, budget: 2, agent_type: "management" },
+          c.signal
+        )).catch(err => {
+          console.error("Management Chat failed:", err);
+          return null;
+        }),
+        import("@/lib/api").then(api => api.runAgentChat(
+          { node_id: selected.id, severity, budget: 2, agent_type: "citizen" },
+          c.signal
+        )).catch(err => {
+          console.error("Citizen Chat failed:", err);
+          return null;
         })
       ]);
       if (controller.current !== c) return;
@@ -159,6 +175,11 @@ export function DashboardShell() {
       if (pred) {
         setPrediction(pred);
         setOptimization(opt);
+        
+        // Pass chats to ImpactReportModal
+        setManagementChat(mgmtChat);
+        setCitizenChat(citizenChat);
+
         setShowReport(true);
       }
       dispatch({ type: "start", events: result.events });
@@ -474,14 +495,16 @@ export function DashboardShell() {
       )}
 
       {/* ── impact report modal ── */}
-      {showReport && prediction && (
-        <ImpactReportModal
-          prediction={prediction}
-          optimization={optimization}
-          onClose={() => setShowReport(false)}
-          onSelectNode={selectNode}
-        />
-      )}
+        {showReport && prediction && (
+          <ImpactReportModal
+            prediction={prediction}
+            optimization={optimization}
+            managementChat={managementChat}
+            citizenChat={citizenChat}
+            onClose={() => setShowReport(false)}
+            onSelectNode={selectNode}
+          />
+        )}
 
 
 

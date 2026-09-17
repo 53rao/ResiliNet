@@ -250,3 +250,7 @@ export interface OptimizationResult {
   timing: any;
   termination_reason: string;
 }
+
+export interface AgentChatResponse {
+  response: string;
+}

@@ -115,3 +115,12 @@ def optimize(request: OptimizationRequest) -> dict:
         raise HTTPException(status_code=400, detail=str(error)) from error
 
 
+from app.agent import AgentChatRequest, AgentChatResponse, run_agent_chat
+
+@app.post('/agent/chat', response_model=AgentChatResponse, tags=['analytics'])
+def agent_chat(request: AgentChatRequest) -> AgentChatResponse:
+    try:
+        return run_agent_chat(request)
+    except Exception as error:
+        raise HTTPException(status_code=500, detail=str(error)) from error
+
