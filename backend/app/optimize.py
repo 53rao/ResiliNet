@@ -1,12 +1,12 @@
 import math
 import random
 import time
-from typing import Any, List, Dict, Set, Optional
+from typing import List, Dict, Optional
 
 # pyrefly: ignore [missing-import]
 from pydantic import Field
 
-from app.models import ContractModel, Graph, GraphNode
+from app.models import ContractModel, Graph
 from app.cascade import CascadeRequest, simulate
 
 class OptimizationRequest(CascadeRequest):

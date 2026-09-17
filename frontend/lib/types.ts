@@ -1,18 +1,3 @@
-export type ApiHealthStatus = "checking" | "online" | "offline";
-
-export interface HealthResponse {
-  status: "ok";
-  service: "resilicity-api";
-  api_version: string;
-  graph_version: string;
-}
-
-export interface HealthState {
-  status: ApiHealthStatus;
-  response: HealthResponse | null;
-  message: string;
-}
-
 export type Domain = "power" | "water" | "traffic" | "healthcare" | "public_safety";
 export type Priority = "critical" | "high" | "medium" | "low";
 export type OperationalState = "normal" | "stressed" | "degraded" | "failed";
@@ -74,17 +59,6 @@ export interface NetworkGraph {
   }>;
 }
 
-export interface TopologyResponse {
-  graph_version: string;
-  engine: string;
-  nodes: number;
-  edges: number;
-  weakly_connected_components: number;
-  strongly_connected_components: number;
-  isolates: number;
-  density: number;
-}
-
 export interface CascadeEvent {
   event_id: string;
   step: number;
@@ -143,36 +117,6 @@ export interface CascadeResult {
   truncated: boolean;
 }
 
-export interface LocalContext {
-  type: "FeatureCollection";
-  name: string;
-  provenance: {
-    kind: ProvenanceKind;
-    source: string;
-    confidence: Confidence;
-    notice: string;
-    license: string;
-    url: string;
-    retrieved_at: string;
-  };
-  center: { lat: number; lng: number };
-  radius_metres: number;
-  raw_feature_count: number;
-  features: Array<{
-    type: "Feature";
-    properties: {
-      kind: string;
-      name: string;
-      domain?: Domain;
-      asset_type?: string;
-      osm_type?: string;
-      osm_id?: number;
-      selected_for_network?: boolean;
-    };
-    geometry: { type: string; coordinates: unknown };
-  }>;
-}
-
 export interface PredictedNodeImpact {
   id: string;
   name: string;
@@ -208,47 +152,6 @@ export interface ImpactPrediction {
   domain_breakdowns: DomainImpactSummary[];
   affected_nodes: PredictedNodeImpact[];
   recommended_interventions: string[];
-}
-
-export interface Protection {
-  node_id: string;
-  parameter: string;
-  old_value: number;
-  new_value: number;
-  multiplier: number;
-}
-
-export interface OptimizationSearchStats {
-  evaluated_sets: number;
-  cache_hits: number;
-  iterations: number;
-  elapsed_ms: number;
-  greedy_evaluated: boolean;
-  no_action_evaluated: boolean;
-}
-
-export interface OptimizationObjective {
-  name: string;
-  baseline_damage: number;
-  mitigated_damage: number;
-  absolute_improvement: number;
-  percentage_improvement: number | null;
-}
-
-export interface OptimizationResult {
-  optimization_id: string;
-  request_id: string;
-  baseline_run_id: string;
-  graph_version: string;
-  model_version: string;
-  input: any;
-  algorithm_used: string;
-  selected_protections: Protection[];
-  search_stats: OptimizationSearchStats;
-  objective: OptimizationObjective;
-  mitigated_result: CascadeResult;
-  timing: any;
-  termination_reason: string;
 }
 
 export interface AgentChatResponse {

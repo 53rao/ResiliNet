@@ -1,13 +1,11 @@
 import json
 from typing import Literal
 from langchain_core.tools import tool
-from langchain_groq import ChatGroq
-from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_core.messages import HumanMessage
 from langgraph.prebuilt import create_react_agent
 from pydantic import BaseModel
 
 from app.graph_repository import get_graph
-from app.cascade import CascadeRequest, simulate
 from app.prediction import PredictionRequest, predict_impact
 from app.optimize import OptimizationRequest, optimize_impact
 

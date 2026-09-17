@@ -1,28 +1,9 @@
-import type { HealthResponse, NetworkGraph, TopologyResponse } from "@/lib/types";
+import type { NetworkGraph } from "@/lib/types";
 
 const DEFAULT_API_BASE_URL = "http://127.0.0.1:8000";
 
 export function getApiBaseUrl(): string {
   return (process.env.NEXT_PUBLIC_API_BASE_URL || DEFAULT_API_BASE_URL).replace(/\/$/, "");
-}
-
-export async function fetchHealth(signal?: AbortSignal): Promise<HealthResponse> {
-  const response = await fetch(`${getApiBaseUrl()}/health`, {
-    method: "GET",
-    headers: { Accept: "application/json" },
-    cache: "no-store",
-    signal,
-  });
-
-  if (!response.ok) {
-    throw new Error(`API returned HTTP ${response.status}`);
-  }
-
-  const data: unknown = await response.json();
-  if (!isHealthResponse(data)) {
-    throw new Error("API returned an invalid health response");
-  }
-  return data;
 }
 
 export async function fetchGraph(signal?: AbortSignal): Promise<NetworkGraph> {
@@ -42,34 +23,6 @@ export async function fetchGraph(signal?: AbortSignal): Promise<NetworkGraph> {
     throw new Error("Graph API returned an invalid graph");
   }
   return data;
-}
-
-export async function fetchTopology(signal?: AbortSignal): Promise<TopologyResponse> {
-  const response = await fetch(`${getApiBaseUrl()}/graph/topology`, {
-    method: "GET",
-    headers: { Accept: "application/json" },
-    cache: "no-store",
-    signal,
-  });
-  if (!response.ok) throw new Error(`Topology API returned HTTP ${response.status}`);
-  const data = await response.json() as TopologyResponse;
-  if (typeof data.engine !== "string" || typeof data.nodes !== "number" || typeof data.edges !== "number") {
-    throw new Error("Topology API returned an invalid response");
-  }
-  return data;
-}
-
-function isHealthResponse(value: unknown): value is HealthResponse {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  const candidate = value as Record<string, unknown>;
-  return (
-    candidate.status === "ok" &&
-    candidate.service === "resilicity-api" &&
-    typeof candidate.api_version === "string" &&
-    typeof candidate.graph_version === "string"
-  );
 }
 
 function isNetworkGraph(value: unknown): value is NetworkGraph {
@@ -131,17 +84,6 @@ export async function runCascade(input: DemoRun["input"], signal?: AbortSignal):
   if (!response.ok) {
     const error = await response.json().catch(() => null);
     throw new Error(typeof error?.detail === "string" ? error.detail : `Simulation failed (HTTP ${response.status})`);
-  }
-  return response.json();
-}
-
-export async function runOptimization(input: DemoRun["input"] & { budget: number }, signal?: AbortSignal): Promise<import("./types").OptimizationResult> {
-  const response = await fetch(`${getApiBaseUrl()}/optimize`, {
-    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(input), signal,
-  });
-  if (!response.ok) {
-    const error = await response.json().catch(() => null);
-    throw new Error(typeof error?.detail === "string" ? error.detail : `Optimization failed (HTTP ${response.status})`);
   }
   return response.json();
 }
