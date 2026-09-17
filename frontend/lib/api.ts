@@ -1,6 +1,6 @@
 import type { HealthResponse, NetworkGraph, TopologyResponse } from "@/lib/types";
 
-const DEFAULT_API_BASE_URL = "http://127.0.0.1:8001";
+const DEFAULT_API_BASE_URL = "http://127.0.0.1:8000";
 
 export function getApiBaseUrl(): string {
   return (process.env.NEXT_PUBLIC_API_BASE_URL || DEFAULT_API_BASE_URL).replace(/\/$/, "");
@@ -142,6 +142,28 @@ export async function runOptimization(input: DemoRun["input"] & { budget: number
   if (!response.ok) {
     const error = await response.json().catch(() => null);
     throw new Error(typeof error?.detail === "string" ? error.detail : `Optimization failed (HTTP ${response.status})`);
+  }
+  return response.json();
+}
+
+export async function runAgentChat(
+  input: {
+    node_id: string;
+    budget: number;
+    severity: "mild" | "moderate" | "severe";
+    agent_type: "management" | "citizen";
+  },
+  signal?: AbortSignal
+): Promise<import("./types").AgentChatResponse> {
+  const response = await fetch(`${getApiBaseUrl()}/agent/chat`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+    signal,
+  });
+  if (!response.ok) {
+    const error = await response.json().catch(() => null);
+    throw new Error(typeof error?.detail === "string" ? error.detail : `Agent chat failed (HTTP ${response.status})`);
   }
   return response.json();
 }
