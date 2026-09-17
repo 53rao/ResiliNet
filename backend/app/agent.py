@@ -1,4 +1,5 @@
 import json
+from functools import lru_cache
 from typing import Literal
 from langchain_core.tools import tool
 from langchain_core.messages import HumanMessage
@@ -10,19 +11,14 @@ from app.prediction import PredictionRequest, predict_impact
 from app.optimize import OptimizationRequest, optimize_impact
 
 
-@tool
-def run_mcts_optimization(node_id: str, budget: int, severity: str = "severe", duration_steps: int = 6) -> str:
-    """Run the Monte Carlo Tree Search (MCTS) optimization engine to find the best infrastructure nodes to protect.
-    
-    Args:
-        node_id: The ID of the node where the failure originated (e.g., 'hospital-st-marys').
-        budget: The number of nodes that can be hardened/protected.
-        severity: The severity of the initial failure ('mild', 'moderate', 'severe').
-        duration_steps: The duration of the failure in steps.
-        
-    Returns:
-        A JSON string containing the optimal nodes to protect and the impact reduction metrics.
-    """
+# The management and citizen agents are invoked concurrently with identical
+# (node_id, severity, budget) inputs, and both independently ask for the same
+# MCTS/prediction results. Both tools are pure functions of the graph (fixed
+# per process) and their arguments, so cache them to avoid running the MCTS
+# search and the cascade re-simulation twice for the same scenario.
+
+@lru_cache(maxsize=64)
+def _run_mcts_optimization_cached(node_id: str, budget: int, severity: str, duration_steps: int) -> str:
     graph = get_graph()
     req = OptimizationRequest(
         graph_version=graph.graph_version,
@@ -47,16 +43,23 @@ def run_mcts_optimization(node_id: str, budget: int, severity: str = "severe", d
 
 
 @tool
-def get_predicted_impact(node_id: str, severity: str = "severe") -> str:
-    """Get the predicted blast radius and cascading impact of a failure before any protections are applied.
-    
+def run_mcts_optimization(node_id: str, budget: int, severity: str = "severe", duration_steps: int = 6) -> str:
+    """Run the Monte Carlo Tree Search (MCTS) optimization engine to find the best infrastructure nodes to protect.
+
     Args:
-        node_id: The ID of the node where the failure originated.
-        severity: The severity of the failure.
-        
+        node_id: The ID of the node where the failure originated (e.g., 'hospital-st-marys').
+        budget: The number of nodes that can be hardened/protected.
+        severity: The severity of the initial failure ('mild', 'moderate', 'severe').
+        duration_steps: The duration of the failure in steps.
+
     Returns:
-        A JSON string containing the predicted blast radius, affected assets, and domain breakdowns.
+        A JSON string containing the optimal nodes to protect and the impact reduction metrics.
     """
+    return _run_mcts_optimization_cached(node_id, budget, severity, duration_steps)
+
+
+@lru_cache(maxsize=64)
+def _get_predicted_impact_cached(node_id: str, severity: str) -> str:
     graph = get_graph()
     req = PredictionRequest(
         graph_version=graph.graph_version,
@@ -76,6 +79,20 @@ def get_predicted_impact(node_id: str, severity: str = "severe") -> str:
     return json.dumps(simplified, indent=2)
 
 
+@tool
+def get_predicted_impact(node_id: str, severity: str = "severe") -> str:
+    """Get the predicted blast radius and cascading impact of a failure before any protections are applied.
+
+    Args:
+        node_id: The ID of the node where the failure originated.
+        severity: The severity of the failure.
+
+    Returns:
+        A JSON string containing the predicted blast radius, affected assets, and domain breakdowns.
+    """
+    return _get_predicted_impact_cached(node_id, severity)
+
+
 # ==========================================
 # Agents
 # ==========================================
@@ -85,6 +102,7 @@ from langchain.chat_models import init_chat_model
 
 load_dotenv()
 
+@lru_cache(maxsize=1)
 def get_llm():
     return init_chat_model(
         "openai/gpt-oss-20b",
@@ -93,6 +111,7 @@ def get_llm():
     )
 
 
+@lru_cache(maxsize=1)
 def get_management_agent():
     system_prompt = """You are a senior City Planner and Emergency Director.
 Your job is to advise city executives on infrastructure resilience investments.
@@ -111,6 +130,7 @@ Keep the briefing under 120 words total. No markdown tables. Use a short title, 
     return create_react_agent(llm, tools, prompt=system_prompt)
 
 
+@lru_cache(maxsize=1)
 def get_citizen_agent():
     system_prompt = """You are a Crisis Communicator and Public Relations Officer for the city.
 Your job is to translate complex infrastructure failures into clear, reassuring, and actionable advice for citizens.
