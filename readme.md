@@ -1,6 +1,6 @@
 # ResiliNet
 
-**Stronger Cities. Safer Tomorrows.**
+**Predict. Mitigate. Prevent the Cascade**
 
 ResiliNet is an interactive infrastructure-resilience scenario sandbox. It models a curated set of
 critical assets across five domains, lets you fail one of them on a live map, and shows how stress
