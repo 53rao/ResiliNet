@@ -57,7 +57,6 @@ export function DashboardShell() {
   const [error, setError]       = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [severity, setSeverity] = useState<"mild" | "moderate" | "severe">("severe");
-  const [duration, setDuration] = useState(6);
   const [visible, setVisible]   = useState<Domain[]>(DOMAINS.map(d => d.id));
   const [run, setRun]           = useState<DemoRun | null>(null);
   const [busy, setBusy]         = useState(false);
@@ -136,11 +135,11 @@ export function DashboardShell() {
     try {
       const [result, pred, mgmtChat, citizenChat] = await Promise.all([
         runCascade(
-          { graph_version: graph.graph_version, node_id: selected.id, severity, duration_steps: duration, seed: 20260915 },
+          { graph_version: graph.graph_version, node_id: selected.id, severity, duration_steps: 6, seed: 20260915 },
           c.signal
         ),
         predictImpact(
-          { graph_version: graph.graph_version, node_id: selected.id, severity, duration_steps: duration },
+          { graph_version: graph.graph_version, node_id: selected.id, severity, duration_steps: 6 },
           c.signal
         ).catch(err => {
           console.error("Prediction failed:", err);
@@ -372,20 +371,6 @@ export function DashboardShell() {
             <option value="moderate">Moderate · 55% disruption</option>
             <option value="severe">Severe · 100% disruption</option>
           </select>
-
-          <label className="node-card__label" htmlFor="duration-range">
-            Scenario horizon · <strong>{duration}</strong> steps
-          </label>
-          <input
-            id="duration-range"
-            className="node-card__range"
-            type="range"
-            min={1}
-            max={12}
-            value={duration}
-            disabled={busy}
-            onChange={e => setDuration(Number(e.target.value))}
-          />
 
           <div className="node-card__actions">
             <button

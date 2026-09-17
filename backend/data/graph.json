@@ -25,8 +25,8 @@
       "type": "hospital",
       "base_load": 79,
       "capacity": 100,
-      "priority": "critical",
-      "priority_weight": 4,
+      "priority": "high",
+      "priority_weight": 3,
       "location": {
         "lat": 51.5175,
         "lng": -0.1743
@@ -62,8 +62,8 @@
       "type": "hospital",
       "base_load": 76,
       "capacity": 100,
-      "priority": "critical",
-      "priority_weight": 4,
+      "priority": "low",
+      "priority_weight": 1,
       "location": {
         "lat": 51.5507,
         "lng": -0.0455
@@ -99,8 +99,8 @@
       "type": "hospital",
       "base_load": 82,
       "capacity": 100,
-      "priority": "critical",
-      "priority_weight": 4,
+      "priority": "medium",
+      "priority_weight": 2,
       "location": {
         "lat": 51.4684,
         "lng": -0.0937
@@ -136,8 +136,8 @@
       "type": "hospital",
       "base_load": 74,
       "capacity": 100,
-      "priority": "critical",
-      "priority_weight": 4,
+      "priority": "high",
+      "priority_weight": 3,
       "location": {
         "lat": 51.4869,
         "lng": -0.2198
@@ -283,8 +283,8 @@
       "type": "bridge",
       "base_load": 75,
       "capacity": 100,
-      "priority": "high",
-      "priority_weight": 3,
+      "priority": "critical",
+      "priority_weight": 4,
       "location": {
         "lat": 51.5055,
         "lng": -0.0753
@@ -319,8 +319,8 @@
       "type": "bridge",
       "base_load": 70,
       "capacity": 100,
-      "priority": "high",
-      "priority_weight": 3,
+      "priority": "critical",
+      "priority_weight": 4,
       "location": {
         "lat": 51.508,
         "lng": -0.0877
@@ -394,8 +394,8 @@
       "type": "substation",
       "base_load": 71,
       "capacity": 100,
-      "priority": "critical",
-      "priority_weight": 4,
+      "priority": "medium",
+      "priority_weight": 2,
       "location": {
         "lat": 51.5484,
         "lng": -0.038
@@ -426,8 +426,8 @@
       "type": "substation",
       "base_load": 73,
       "capacity": 100,
-      "priority": "critical",
-      "priority_weight": 4,
+      "priority": "medium",
+      "priority_weight": 2,
       "location": {
         "lat": 51.518,
         "lng": -0.065
@@ -458,8 +458,8 @@
       "type": "substation",
       "base_load": 69,
       "capacity": 100,
-      "priority": "critical",
-      "priority_weight": 4,
+      "priority": "medium",
+      "priority_weight": 2,
       "location": {
         "lat": 51.4628,
         "lng": -0.018
@@ -490,8 +490,8 @@
       "type": "ambulance_station",
       "base_load": 65,
       "capacity": 100,
-      "priority": "critical",
-      "priority_weight": 4,
+      "priority": "low",
+      "priority_weight": 1,
       "location": {
         "lat": 51.5753,
         "lng": -0.3215
@@ -521,8 +521,8 @@
       "type": "ambulance_station",
       "base_load": 63,
       "capacity": 100,
-      "priority": "high",
-      "priority_weight": 3,
+      "priority": "medium",
+      "priority_weight": 2,
       "location": {
         "lat": 51.4619,
         "lng": -0.188
@@ -625,8 +625,8 @@
       "type": "walk_in_clinic",
       "base_load": 28,
       "capacity": 100,
-      "priority": "low",
-      "priority_weight": 1,
+      "priority": "medium",
+      "priority_weight": 2,
       "location": {
         "lat": 51.5135,
         "lng": -0.132
@@ -684,8 +684,8 @@
       "type": "monitoring_station",
       "base_load": 22,
       "capacity": 100,
-      "priority": "low",
-      "priority_weight": 1,
+      "priority": "medium",
+      "priority_weight": 2,
       "location": {
         "lat": 51.478,
         "lng": -0.145
@@ -705,8 +705,8 @@
       "type": "transit_hub",
       "base_load": 54,
       "capacity": 100,
-      "priority": "medium",
-      "priority_weight": 2,
+      "priority": "high",
+      "priority_weight": 3,
       "location": {
         "lat": 51.4944,
         "lng": -0.1008
@@ -734,8 +734,8 @@
       "type": "fire_station",
       "base_load": 44,
       "capacity": 100,
-      "priority": "medium",
-      "priority_weight": 2,
+      "priority": "high",
+      "priority_weight": 3,
       "location": {
         "lat": 51.493,
         "lng": -0.118
@@ -764,8 +764,8 @@
       "type": "substation",
       "base_load": 48,
       "capacity": 100,
-      "priority": "medium",
-      "priority_weight": 2,
+      "priority": "critical",
+      "priority_weight": 4,
       "location": {
         "lat": 51.503,
         "lng": -0.098
