@@ -73,48 +73,12 @@ export interface CascadeEvent {
   reason: string;
 }
 
-export interface NodeResult {
-  node_id: string;
-  state: OperationalState;
-  disruption_fraction: number;
-  effective_load: number;
-  effective_capacity: number;
-  load_ratio: number | null;
-  damage: number;
-  first_affected_step: number | null;
-  causal_event_ids: string[];
-}
-
 export interface CascadeMetrics {
   affected_assets: number;
   failed_assets: number;
   affected_critical_assets: number;
   priority_weighted_damage: number;
   propagation_depth: number;
-}
-
-export interface CascadeResult {
-  run_id: string;
-  scenario_id: string;
-  request_id: string;
-  graph_version: string;
-  model_version: string;
-  input: {
-    graph_version: string;
-    node_id: string;
-    severity: "mild" | "moderate" | "severe";
-    duration_steps: number;
-    seed: number;
-  };
-  started_at: string;
-  completed_at: string;
-  events: CascadeEvent[];
-  node_results: NodeResult[];
-  metrics: CascadeMetrics;
-  domain_damage: Record<Domain, number>;
-  assumptions: string[];
-  timing: { load_ms: number; cascade_ms: number; total_ms: number };
-  truncated: boolean;
 }
 
 export interface PredictedNodeImpact {
