@@ -2118,6 +2118,53 @@ input:focus-visible {
   margin: 0;
 }
 
+/* ── Agent markdown rendering (management/citizen briefings) ────────── */
+.agent-md {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.agent-md-heading {
+  font-weight: 700;
+  color: var(--text);
+  margin: 4px 0 0;
+  line-height: 1.3;
+}
+.agent-md-heading--1 { font-size: 12px; letter-spacing: 0.01em; }
+.agent-md-heading--2 { font-size: 11px; }
+.agent-md-heading--3,
+.agent-md-heading--4,
+.agent-md-heading--5,
+.agent-md-heading--6 {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mint);
+}
+
+.agent-md-paragraph {
+  font-size: 9.5px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.agent-md-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 2px 0;
+  flex-shrink: 0;
+}
+
+.agent-md-list {
+  gap: 5px;
+}
+
+.agent-md-table-sep {
+  color: rgba(255,255,255,0.35);
+}
+
 /* ════════════════════════════════════════════════════════
    CYBERNETIC AI AGENT SCREEN RUNNER (ROBOT HEAD & FLICKER)
    ════════════════════════════════════════════════════════ */

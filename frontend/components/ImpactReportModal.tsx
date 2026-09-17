@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import type { Domain, ImpactPrediction, OptimizationResult } from "@/lib/types";
+import type { Domain, ImpactPrediction } from "@/lib/types";
 import { AgentRunningView } from "@/components/AgentRunningView";
+import { AgentMarkdown } from "@/components/AgentMarkdown";
 
 const DOMAIN_COLOR: Record<Domain, string> = {
   power: "#4ade80",
@@ -22,17 +23,16 @@ const DOMAIN_ICON: Record<Domain, string> = {
 
 interface ImpactReportModalProps {
   prediction: ImpactPrediction;
-  optimization: OptimizationResult | null;
   managementChat?: any;
   citizenChat?: any;
   onClose: () => void;
   onSelectNode?: (nodeId: string) => void;
 }
 
-export function ImpactReportModal({ prediction, optimization, managementChat, citizenChat, onClose, onSelectNode }: ImpactReportModalProps) {
+export function ImpactReportModal({ prediction, managementChat, citizenChat, onClose, onSelectNode }: ImpactReportModalProps) {
   const [domainAgentRunning, setDomainAgentRunning] = useState(true);
   const [mitigationAgentRunning, setMitigationAgentRunning] = useState(true);
-  const [activeTab, setActiveTab] = useState<"optimization" | "management" | "citizen">("optimization");
+  const [activeTab, setActiveTab] = useState<"management" | "citizen">("management");
   return (
     <div className="bento-overlay" onClick={onClose}>
       <div className="bento-grid" onClick={(e) => e.stopPropagation()}>
@@ -183,20 +183,14 @@ export function ImpactReportModal({ prediction, optimization, managementChat, ci
 
             {!mitigationAgentRunning && (
               <div style={{ display: "flex", gap: "10px", marginBottom: "12px" }}>
-                <button 
-                  style={{ padding: "4px 8px", background: activeTab === "optimization" ? "#333" : "transparent", border: "1px solid #444", borderRadius: "4px", color: "white", cursor: "pointer" }}
-                  onClick={() => setActiveTab("optimization")}
-                >
-                  Raw Optimization
-                </button>
-                <button 
-                  style={{ padding: "4px 8px", background: activeTab === "management" ? "#333" : "transparent", border: "1px solid #444", borderRadius: "4px", color: "white", cursor: "pointer" }}
+                <button
+                  style={{ flex: 1, padding: "6px 8px", background: activeTab === "management" ? "#333" : "transparent", border: "1px solid #444", borderRadius: "4px", color: "white", cursor: "pointer" }}
                   onClick={() => setActiveTab("management")}
                 >
                   Management Briefing
                 </button>
-                <button 
-                  style={{ padding: "4px 8px", background: activeTab === "citizen" ? "#333" : "transparent", border: "1px solid #444", borderRadius: "4px", color: "white", cursor: "pointer" }}
+                <button
+                  style={{ flex: 1, padding: "6px 8px", background: activeTab === "citizen" ? "#333" : "transparent", border: "1px solid #444", borderRadius: "4px", color: "white", cursor: "pointer" }}
                   onClick={() => setActiveTab("citizen")}
                 >
                   Citizen Advisory
@@ -219,50 +213,15 @@ export function ImpactReportModal({ prediction, optimization, managementChat, ci
               />
             ) : (
               <div className="bento-mitigation-content animate-fade-in" style={{ flex: 1, overflowY: "auto", paddingRight: "8px" }}>
-                {activeTab === "optimization" && (
-                  optimization ? (
-                    <>
-                      <p className="bento-mitigation-intro">
-                        MCTS optimization completed with <strong>{optimization.search_stats.iterations}</strong> simulations in {optimization.timing.total_ms}ms.
-                        <br/>
-                        Mitigated priority-weighted damage: <strong>{optimization.objective.mitigated_damage}</strong> (down from {optimization.objective.baseline_damage})
-                        <br/>
-                        Impact reduction: <strong>{optimization.objective.absolute_improvement}</strong> 
-                        {optimization.objective.percentage_improvement != null ? ` (${optimization.objective.percentage_improvement.toFixed(1)}%)` : ''}
-                      </p>
-                      <div className="bento-mitigation-list">
-                        {optimization.selected_protections.length > 0 ? (
-                          optimization.selected_protections.map((rec, idx) => (
-                            <div key={idx} className="bento-mitigation-item">
-                              <div className="bento-mitigation-num">{idx + 1}</div>
-                              <p className="bento-mitigation-text">
-                                Protect node <strong>{rec.node_id}</strong> (Multiply {rec.parameter} by {rec.multiplier})
-                              </p>
-                            </div>
-                          ))
-                        ) : (
-                          <div className="bento-mitigation-item">
-                            <p className="bento-mitigation-text">No useful protections found within budget.</p>
-                          </div>
-                        )}
-                      </div>
-                    </>
-                  ) : <p className="bento-mitigation-intro">Optimization result unavailable.</p>
-                )}
-
                 {activeTab === "management" && (
                   managementChat ? (
-                    <div style={{ whiteSpace: "pre-wrap", fontSize: "14px", lineHeight: "1.5", color: "#e2e8f0" }}>
-                      {managementChat.response}
-                    </div>
+                    <AgentMarkdown text={managementChat.response} />
                   ) : <p className="bento-mitigation-intro">Management Briefing unavailable. Was Groq API key set?</p>
                 )}
 
                 {activeTab === "citizen" && (
                   citizenChat ? (
-                    <div style={{ whiteSpace: "pre-wrap", fontSize: "14px", lineHeight: "1.5", color: "#e2e8f0" }}>
-                      {citizenChat.response}
-                    </div>
+                    <AgentMarkdown text={citizenChat.response} />
                   ) : <p className="bento-mitigation-intro">Citizen Advisory unavailable. Was Groq API key set?</p>
                 )}
               </div>

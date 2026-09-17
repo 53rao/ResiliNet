@@ -3,9 +3,9 @@
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { PulseIcon } from "@/components/Icons";
-import { fetchGraph, runCascade, predictImpact, runOptimization, type DemoRun } from "@/lib/api";
+import { fetchGraph, runCascade, predictImpact, type DemoRun } from "@/lib/api";
 import { createInitialPlaybackState, getStepMetrics, playbackReducer } from "@/lib/playback";
-import type { Domain, NetworkGraph, ImpactPrediction, OptimizationResult } from "@/lib/types";
+import type { Domain, NetworkGraph, ImpactPrediction } from "@/lib/types";
 import { ImpactReportModal } from "@/components/ImpactReportModal";
 
 const NetworkMap = dynamic(
@@ -37,14 +37,13 @@ const DOMAIN_LABEL: Record<Domain, string> = {
   public_safety: "Emergency",
 };
 
+const CLOCK_FORMAT: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit", timeZone: "Europe/London" };
+
 function useClock() {
-  const [time, setTime] = useState(() => {
-    const d = new Date();
-    return d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
-  });
+  const [time, setTime] = useState(() => new Date().toLocaleTimeString("en-GB", CLOCK_FORMAT));
   useEffect(() => {
     const id = setInterval(() => {
-      setTime(new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }));
+      setTime(new Date().toLocaleTimeString("en-GB", CLOCK_FORMAT));
     }, 30_000);
     return () => clearInterval(id);
   }, []);
@@ -64,7 +63,6 @@ export function DashboardShell() {
   const [busy, setBusy]         = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [prediction, setPrediction] = useState<ImpactPrediction | null>(null);
-  const [optimization, setOptimization] = useState<OptimizationResult | null>(null);
   const [managementChat, setManagementChat] = useState<any>(null);
   const [citizenChat, setCitizenChat] = useState<any>(null);
   const [showReport, setShowReport] = useState(false);
@@ -136,7 +134,7 @@ export function DashboardShell() {
     setRun(null);
     dispatch({ type: "reset" });
     try {
-      const [result, pred, opt, mgmtChat, citizenChat] = await Promise.all([
+      const [result, pred, mgmtChat, citizenChat] = await Promise.all([
         runCascade(
           { graph_version: graph.graph_version, node_id: selected.id, severity, duration_steps: duration, seed: 20260915 },
           c.signal
@@ -146,13 +144,6 @@ export function DashboardShell() {
           c.signal
         ).catch(err => {
           console.error("Prediction failed:", err);
-          return null;
-        }),
-        runOptimization(
-          { graph_version: graph.graph_version, node_id: selected.id, severity, duration_steps: duration, seed: 20260915, budget: 2 },
-          c.signal
-        ).catch(err => {
-          console.error("Optimization failed:", err);
           return null;
         }),
         import("@/lib/api").then(api => api.runAgentChat(
@@ -174,8 +165,7 @@ export function DashboardShell() {
       setRun(result);
       if (pred) {
         setPrediction(pred);
-        setOptimization(opt);
-        
+
         // Pass chats to ImpactReportModal
         setManagementChat(mgmtChat);
         setCitizenChat(citizenChat);
@@ -498,7 +488,6 @@ export function DashboardShell() {
         {showReport && prediction && (
           <ImpactReportModal
             prediction={prediction}
-            optimization={optimization}
             managementChat={managementChat}
             citizenChat={citizenChat}
             onClose={() => setShowReport(false)}

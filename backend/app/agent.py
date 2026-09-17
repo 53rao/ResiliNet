@@ -34,7 +34,18 @@ def run_mcts_optimization(node_id: str, budget: int, severity: str = "severe", d
         duration_steps=duration_steps
     )
     result = optimize_impact(graph, req)
-    return json.dumps(result, indent=2)
+    # Keep only what the LLM needs to reason about; the full result (including
+    # the re-run cascade's raw events) is large and burns tokens for no benefit.
+    simplified = {
+        "algorithm_used": result["algorithm_used"],
+        "baseline_damage": result["objective"]["baseline_damage"],
+        "mitigated_damage": result["objective"]["mitigated_damage"],
+        "absolute_improvement": result["objective"]["absolute_improvement"],
+        "percentage_improvement": result["objective"]["percentage_improvement"],
+        "protected_nodes": [p["node_id"] for p in result["selected_protections"]],
+        "iterations": result["search_stats"]["iterations"],
+    }
+    return json.dumps(simplified, indent=2)
 
 
 @tool
@@ -85,15 +96,17 @@ def get_llm():
 
 
 def get_management_agent():
-    system_prompt = """You are a senior City Planner and Emergency Director. 
+    system_prompt = """You are a senior City Planner and Emergency Director.
 Your job is to advise city executives on infrastructure resilience investments.
 You have access to a deterministic Monte Carlo Tree Search (MCTS) optimization tool that can tell you exactly which infrastructure nodes to protect given a budget.
 
 When a crisis occurs at a specific node:
 1. First, check the baseline predicted impact.
 2. Then, run the MCTS optimizer with the given budget to find the optimal intervention.
-3. Synthesize the results into a concise, professional executive briefing. 
+3. Synthesize the results into a concise, professional executive briefing.
 Focus on ROI (Return on Investment), operational metrics, and the strategic value of the recommended interventions.
+
+Keep the briefing under 120 words total. No markdown tables. Use a short title, at most 3 bullet points, and one closing sentence. Do not restate raw numbers you already showed in a bullet.
 """
     tools = [run_mcts_optimization, get_predicted_impact]
     llm = get_llm()
@@ -110,6 +123,8 @@ When a crisis occurs:
 2. Run the MCTS optimizer to see what the city is successfully protecting.
 3. Write a public advisory notice.
 Focus on human impact: what services will stay online (thanks to the interventions), what might go down, and safety instructions for the public. Keep the tone calm, empathetic, and clear.
+
+Keep the notice under 100 words total. No markdown tables, no headers with dates/timestamps. Use a short title, at most 3 bullet points, and one closing sentence.
 """
     tools = [run_mcts_optimization, get_predicted_impact]
     llm = get_llm()
